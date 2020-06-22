@@ -1,12 +1,14 @@
 # `github-issues-recoil`
 
 This is the GitHub Issues app from the Redux Toolkit advanced tutorial re-written using Facebook's
-new [Recoil]() library (and GitHub's [Primer]() CSS).
+new [Recoil](https://recoiljs.org) library (and GitHub's [Primer](https://primer.style/css) CSS).
 
 The only references I used were [Dave McCabe's presentation from React Europe](https://www.youtube.com/watch?v=_ISAA_Jt9kI)
 and the Recoil documentation. Because this is a new library only used in production internally at
 Facebook, I have no idea what the community best practices are. Also, I'm only using the core
 features of the Recoil API (nothing advanced). That being said, I'm pretty happy with it!
+
+[Demo](https://adamelliotfields.github.io/github-issues-recoil)
 
 ## Introduction
 
