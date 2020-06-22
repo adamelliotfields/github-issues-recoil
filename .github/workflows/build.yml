@@ -1,0 +1,50 @@
+name: build
+
+on:
+  - push
+
+env:
+  CI: true
+  NODE_ENV: production
+  # This is a GitHub Personal Access Token with `repo` scope.
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - name: NVM
+        id: nvm
+        run: echo '::set-output name=nvm_rc::$(cat .nvmrc)'
+      - name: Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.nvm_rc }}'
+      - name: Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: NPM
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        # Use the token as our password to authenticate (https://git-scm.com/docs/git-credential-store).
+        run: |
+          touch "${HOME}/.git-credentials"
+          touch "${HOME}/.gitconfig"
+          echo "https://adamelliotfields:${GH_TOKEN}@github.com" > "${HOME}/.git-credentials"
+          cat <<EOF > "${HOME}/.gitconfig"
+          [user]
+            name = Adam Fields
+            email = adam.elliot.fields@gmail.com
+          [credential]
+            helper = store
+          EOF
+          npm run deploy
