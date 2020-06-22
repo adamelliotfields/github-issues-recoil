@@ -2,6 +2,7 @@
   "private": true,
   "name": "github-issues-recoil",
   "version": "0.0.0",
+  "homepage": "https://adamelliotfields.github.io/github-issues-recoil",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
