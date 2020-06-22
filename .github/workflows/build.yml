@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
       - name: NVM
         id: nvm
-        run: echo '::set-output name=nvm_rc::$(cat .nvmrc)'
+        run: echo "::set-output name=nvm_rc::$(cat .nvmrc)"
       - name: Node.js
         uses: actions/setup-node@v1
         with:
