@@ -1,0 +1,10 @@
+extends:
+  - react-app
+  - airbnb
+  - plugin:prettier/recommended
+rules:
+  react/no-danger: off
+  react-hooks/rules-of-hooks: error
+  react-hooks/exhaustive-deps:
+    - warn
+    - additionalHooks: useRecoilCallback
